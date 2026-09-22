@@ -1,0 +1,267 @@
+/* ==========================================================================
+   EaseMotion Tokens & Brutalist Theme Variables
+   ========================================================================== */
+:root {
+  /* Brutalist Palette Tokens */
+  --easemotion-brutal-bg: #f0ece1;
+  --easemotion-brutal-card-bg: #ffffff;
+  --easemotion-brutal-black: #000000;
+  --easemotion-brutal-accent: #ff4713;
+  --easemotion-brutal-yellow: #ffe600;
+  --easemotion-brutal-shadow: 5px 5px 0px #000000;
+  --easemotion-brutal-shadow-active: 2px 2px 0px #000000;
+
+  /* Motion Variables */
+  --easemotion-ease-bounce: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --easemotion-ease-standard: cubic-bezier(0.4, 0, 0.2, 1);
+  --easemotion-duration-fast: 150ms;
+  --easemotion-duration-normal: 300ms;
+}
+
+/* ==========================================================================
+   Base & Layout
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--easemotion-brutal-bg);
+  color: var(--easemotion-brutal-black);
+  font-family: 'Arial Black', Impact, sans-serif;
+  min-height: 100vh;
+  padding: 40px 20px;
+}
+
+.timeline-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.timeline-header {
+  margin-bottom: 40px;
+  border: 4px solid var(--easemotion-brutal-black);
+  background: var(--easemotion-brutal-yellow);
+  padding: 20px;
+  box-shadow: var(--easemotion-brutal-shadow);
+}
+
+.timeline-title {
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  text-transform: uppercase;
+  letter-spacing: -1px;
+}
+
+.timeline-subtitle {
+  font-family: monospace;
+  font-weight: bold;
+  margin-top: 5px;
+}
+
+/* ==========================================================================
+   Brutalist Vertical Timeline
+   ========================================================================== */
+.brutal-timeline {
+  position: relative;
+  padding-left: 30px;
+}
+
+/* Central vertical spine */
+.brutal-timeline::before {
+  content: '';
+  position: absolute;
+  left: 14px;
+  top: 0;
+  bottom: 0;
+  width: 6px;
+  background-color: var(--easemotion-brutal-black);
+}
+
+.timeline-item {
+  position: relative;
+  margin-bottom: 30px;
+}
+
+/* Hidden state-management checkbox */
+.timeline-toggle {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* Spine Marker Node */
+.timeline-marker {
+  position: absolute;
+  left: -30px;
+  top: 0;
+  width: 36px;
+  height: 36px;
+  background: var(--easemotion-brutal-card-bg);
+  border: 4px solid var(--easemotion-brutal-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: monospace;
+  font-weight: 900;
+  font-size: 0.9rem;
+  z-index: 2;
+  transition: background-color var(--easemotion-duration-fast) var(--easemotion-ease-standard);
+}
+
+.timeline-toggle:checked ~ .timeline-marker {
+  background: var(--easemotion-brutal-accent);
+  color: #ffffff;
+}
+
+/* ==========================================================================
+   Timeline Card & Interactivity
+   ========================================================================== */
+.timeline-card {
+  margin-left: 25px;
+  border: 4px solid var(--easemotion-brutal-black);
+  background: var(--easemotion-brutal-card-bg);
+  box-shadow: var(--easemotion-brutal-shadow);
+  transition: transform var(--easemotion-duration-fast) var(--easemotion-ease-standard),
+              box-shadow var(--easemotion-duration-fast) var(--easemotion-ease-standard);
+}
+
+.timeline-card__header {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: center;
+  gap: 15px;
+  padding: 15px 20px;
+  cursor: pointer;
+  user-select: none;
+  background: var(--easemotion-brutal-card-bg);
+}
+
+.timeline-card__header:hover {
+  background: rgba(255, 230, 0, 0.3);
+}
+
+.timeline-date {
+  font-family: monospace;
+  font-size: 0.85rem;
+  background: var(--easemotion-brutal-black);
+  color: #ffffff;
+  padding: 2px 6px;
+}
+
+.timeline-card__title {
+  font-size: 1.1rem;
+  text-transform: uppercase;
+  word-break: break-word;
+}
+
+.timeline-icon {
+  font-size: 1.5rem;
+  font-weight: 900;
+  line-height: 1;
+  transition: transform var(--easemotion-duration-normal) var(--easemotion-ease-bounce);
+}
+
+/* Toggle state transitions */
+.timeline-toggle:checked ~ .timeline-card .timeline-icon {
+  transform: rotate(135deg);
+}
+
+.timeline-toggle:focus-visible ~ .timeline-card {
+  outline: 4px solid var(--easemotion-brutal-accent);
+}
+
+/* Smooth Accordion Body Collapse/Expand */
+.timeline-card__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--easemotion-duration-normal) var(--easemotion-ease-standard);
+  border-top: 0px solid var(--easemotion-brutal-black);
+}
+
+.timeline-card__body > p,
+.timeline-card__body > .timeline-tags {
+  overflow: hidden;
+  opacity: 0;
+  transition: opacity var(--easemotion-duration-fast) ease;
+}
+
+.timeline-toggle:checked ~ .timeline-card .timeline-card__body {
+  grid-template-rows: 1fr;
+  border-top-width: 4px;
+  padding: 15px 20px;
+}
+
+.timeline-toggle:checked ~ .timeline-card .timeline-card__body > p,
+.timeline-toggle:checked ~ .timeline-card .timeline-card__body > .timeline-tags {
+  opacity: 1;
+  transition: opacity var(--easemotion-duration-normal) var(--easemotion-ease-standard) 100ms;
+}
+
+.timeline-card__body p {
+  font-family: sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  font-size: 0.95rem;
+}
+
+.timeline-tags {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.tag {
+  font-family: monospace;
+  font-size: 0.75rem;
+  border: 2px solid var(--easemotion-brutal-black);
+  padding: 2px 6px;
+  background: var(--easemotion-brutal-yellow);
+}
+
+/* ==========================================================================
+   Responsive & Accessibility Overrides
+   ========================================================================== */
+@media (max-width: 600px) {
+  .brutal-timeline {
+    padding-left: 15px;
+  }
+  
+  .brutal-timeline::before {
+    left: 4px;
+  }
+  
+  .timeline-marker {
+    left: -20px;
+    width: 30px;
+    height: 30px;
+    font-size: 0.75rem;
+  }
+  
+  .timeline-card {
+    margin-left: 15px;
+  }
+  
+  .timeline-card__header {
+    grid-template-columns: 1fr auto;
+    gap: 8px;
+  }
+  
+  .timeline-date {
+    grid-column: 1 / -1;
+    width: fit-content;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .timeline-card,
+  .timeline-icon,
+  .timeline-card__body,
+  .timeline-card__body > p,
+  .timeline-card__body > .timeline-tags,
+  .timeline-marker {
+    transition: none !important;
+  }
+}
