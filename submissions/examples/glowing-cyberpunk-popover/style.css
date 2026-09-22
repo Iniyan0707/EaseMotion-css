@@ -1,0 +1,231 @@
+/* ==========================================================================
+   EaseMotion Design Tokens & Fallbacks
+   ========================================================================== */
+:root {
+  /* Design Tokens */
+  --easemotion-glow-color: #00f3ff;
+  --easemotion-glow-secondary: #ff0055;
+  --easemotion-bg-dark: #0a0a12;
+  --easemotion-bg-panel: rgba(16, 16, 28, 0.92);
+  --easemotion-text-main: #e0f7fc;
+  --easemotion-text-dim: #5c788a;
+  
+  /* EaseMotion Motion Variables */
+  --easemotion-ease-out-back: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --easemotion-ease-in-out: cubic-bezier(0.4, 0, 0.2, 1);
+  --easemotion-duration-fast: 200ms;
+  --easemotion-duration-normal: 350ms;
+}
+
+/* ==========================================================================
+   Layout & Reset
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--easemotion-bg-dark);
+  color: var(--easemotion-text-main);
+  font-family: 'Courier New', Courier, monospace;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-image: 
+    radial-gradient(circle at 50% 50%, rgba(0, 243, 255, 0.05) 0%, transparent 60%),
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 100% 100%, 20px 20px, 20px 20px;
+}
+
+.popover-wrapper {
+  position: relative;
+}
+
+/* ==========================================================================
+   Trigger Button Styling
+   ========================================================================== */
+.cyber-button {
+  position: relative;
+  background: transparent;
+  color: var(--easemotion-glow-color);
+  border: 1px solid var(--easemotion-glow-color);
+  padding: 12px 24px;
+  font-family: inherit;
+  font-weight: bold;
+  letter-spacing: 1.5px;
+  cursor: pointer;
+  overflow: hidden;
+  clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+  transition: all var(--easemotion-duration-fast) var(--easemotion-ease-in-out);
+  box-shadow: 0 0 10px rgba(0, 243, 255, 0.2);
+}
+
+.cyber-button:hover,
+.cyber-button:focus-visible {
+  background: var(--easemotion-glow-color);
+  color: var(--easemotion-bg-dark);
+  box-shadow: 0 0 20px var(--easemotion-glow-color);
+  outline: none;
+}
+
+.cyber-button__tag {
+  font-size: 0.7em;
+  background: var(--easemotion-glow-secondary);
+  color: #fff;
+  padding: 2px 4px;
+  margin-left: 8px;
+  vertical-align: middle;
+}
+
+/* ==========================================================================
+   Cyberpunk Popover Core & Animations
+   ========================================================================== */
+.cyber-popover {
+  /* Native Popover Reset */
+  border: none;
+  padding: 0;
+  margin: 0;
+  background: transparent;
+  
+  /* Positioning relative to trigger */
+  position: absolute;
+  top: calc(100% + 12px);
+  left: 50%;
+  transform: translateX(-50%);
+  
+  /* Styling */
+  width: min(320px, 90vw);
+  background-color: var(--easemotion-bg-panel);
+  color: var(--easemotion-text-main);
+  border: 1px solid var(--easemotion-glow-color);
+  border-radius: 2px;
+  box-shadow: 0 0 15px rgba(0, 243, 255, 0.3), inset 0 0 15px rgba(0, 243, 255, 0.1);
+  backdrop-filter: blur(8px);
+  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%);
+  
+  /* State Transitions (Pure CSS) */
+  opacity: 0;
+  transform: translate(-50%, -10px) scale(0.95);
+  transition: 
+    opacity var(--easemotion-duration-normal) var(--easemotion-ease-in-out),
+    transform var(--easemotion-duration-normal) var(--easemotion-ease-out-back),
+    display var(--easemotion-duration-normal) allow-discrete;
+}
+
+/* Popover Open State */
+.cyber-popover:popover-open {
+  opacity: 1;
+  transform: translate(-50%, 0) scale(1);
+}
+
+/* Starting Style for smooth entry animation */
+@starting-style {
+  .cyber-popover:popover-open {
+    opacity: 0;
+    transform: translate(-50%, -10px) scale(0.95);
+  }
+}
+
+/* ==========================================================================
+   Popover Internal Layout
+   ========================================================================== */
+.cyber-popover__header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  border-bottom: 1px solid rgba(0, 243, 255, 0.2);
+  background: rgba(0, 243, 255, 0.05);
+}
+
+.cyber-popover__status {
+  width: 8px;
+  height: 8px;
+  background-color: var(--easemotion-glow-color);
+  border-radius: 50%;
+  box-shadow: 0 0 8px var(--easemotion-glow-color);
+}
+
+.cyber-popover__title {
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  color: var(--easemotion-glow-color);
+}
+
+.cyber-popover__body {
+  padding: 16px;
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.cyber-popover__stats {
+  margin-top: 12px;
+  padding-top: 8px;
+  border-top: 1px dashed rgba(92, 120, 138, 0.4);
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--easemotion-text-dim);
+}
+
+.cyber-popover__stats strong {
+  color: var(--easemotion-glow-secondary);
+}
+
+.cyber-popover__footer {
+  padding: 8px 16px 12px;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.cyber-action-btn {
+  background: transparent;
+  border: 1px solid var(--easemotion-glow-secondary);
+  color: var(--easemotion-glow-secondary);
+  padding: 6px 12px;
+  font-family: inherit;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all var(--easemotion-duration-fast) ease;
+}
+
+.cyber-action-btn:hover {
+  background: var(--easemotion-glow-secondary);
+  color: #fff;
+  box-shadow: 0 0 10px var(--easemotion-glow-secondary);
+}
+
+/* ==========================================================================
+   Accessibility & Responsiveness
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .cyber-popover,
+  .cyber-button {
+    transition: none !important;
+  }
+}
+
+@media (max-width: 480px) {
+  .cyber-popover {
+    position: fixed;
+    top: auto;
+    bottom: 20px;
+    left: 5%;
+    right: 5%;
+    width: 90%;
+    transform: translateY(20px);
+  }
+
+  .cyber-popover:popover-open {
+    transform: translateY(0);
+  }
+
+  @starting-style {
+    .cyber-popover:popover-open {
+      transform: translateY(20px);
+    }
+  }
+}
