@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Brutalist Interactive Vertical Timeline Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="timeline-container">
+    <header class="timeline-header">
+      <h1 class="timeline-title">SYSTEM_CHANGELOG</h1>
+      <p class="timeline-subtitle">INTERACTIVE CHRONOLOGY // CLICK TO EXPAND</p>
+    </header>
+
+    <div class="brutal-timeline">
+      <!-- Timeline Item 1 -->
+      <section class="timeline-item">
+        <input type="checkbox" id="node-1" class="timeline-toggle" checked aria-label="Toggle details for Phase 01">
+        <div class="timeline-marker">01</div>
+        <div class="timeline-card">
+          <label for="node-1" class="timeline-card__header">
+            <span class="timeline-date">2026.09.15</span>
+            <h2 class="timeline-card__title">NEO_ARCHITECTURE_DEPLOYED</h2>
+            <span class="timeline-icon" aria-hidden="true">+</span>
+          </label>
+          <div class="timeline-card__body">
+            <p>Migrated core design systems to zero-JS CSS primitives. Raw layout boundaries enforced with hard borders and high-contrast tokens.</p>
+            <div class="timeline-tags">
+              <span class="tag">#CORE</span>
+              <span class="tag">#CSS</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline Item 2 -->
+      <section class="timeline-item">
+        <input type="checkbox" id="node-2" class="timeline-toggle" aria-label="Toggle details for Phase 02">
+        <div class="timeline-marker">02</div>
+        <div class="timeline-card">
+          <label for="node-2" class="timeline-card__header">
+            <span class="timeline-date">2026.08.01</span>
+            <h2 class="timeline-card__title">ACCESSIBILITY_OVERHAUL</h2>
+            <span class="timeline-icon" aria-hidden="true">+</span>
+          </label>
+          <div class="timeline-card__body">
+            <p>Integrated strict high-contrast standard parameters. Added automated motion reduction support for system preferences.</p>
+            <div class="timeline-tags">
+              <span class="tag">#A11Y</span>
+              <span class="tag">#WCAG</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Timeline Item 3 -->
+      <section class="timeline-item">
+        <input type="checkbox" id="node-3" class="timeline-toggle" aria-label="Toggle details for Phase 03">
+        <div class="timeline-marker">03</div>
+        <div class="timeline-card">
+          <label for="node-3" class="timeline-card__header">
+            <span class="timeline-date">2026.06.12</span>
+            <h2 class="timeline-card__title">INITIAL_RELEASE_v1.0</h2>
+            <span class="timeline-icon" aria-hidden="true">+</span>
+          </label>
+          <div class="timeline-card__body">
+            <p>Base protocol initialization. Established standard grid units, custom variable integration, and core token infrastructure.</p>
+            <div class="timeline-tags">
+              <span class="tag">#RELEASE</span>
+              <span class="tag">#INIT</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+  </main>
+
+</body>
+</html>
