@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glowing Flyout Popover - EaseMotion</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="container">
+    <!-- Popover Anchor Wrapper -->
+    <div class="popover-wrapper">
+      <!-- Hidden Checkbox for Pure CSS Toggle state -->
+      <input type="checkbox" id="popover-toggle" class="popover-checkbox" aria-label="Toggle notifications popover">
+      
+      <!-- Trigger Button -->
+      <label for="popover-toggle" class="popover-trigger" role="button" tabindex="0">
+        <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path>
+          <path d="M13.73 21a2 2 0 0 1-3.46 0"></path>
+        </svg>
+        <span>Notifications</span>
+      </label>
+
+      <!-- Flyout Popover -->
+      <section class="popover-flyout" role="dialog" aria-labelledby="popover-title">
+        <div class="popover-glow-backdrop"></div>
+        <div class="popover-content">
+          <header class="popover-header">
+            <h3 id="popover-title">Activity Feed</h3>
+            <label for="popover-toggle" class="close-btn" aria-label="Close popover">&times;</label>
+          </header>
+          <div class="popover-body">
+            <article class="notification-item">
+              <span class="status-dot"></span>
+              <div>
+                <p class="notification-text"><strong>System Update:</strong> Dark mode token set applied successfully.</p>
+                <time datetime="2026-09-22T11:00">2 minutes ago</time>
+              </div>
+            </article>
+            <article class="notification-item">
+              <span class="status-dot"></span>
+              <div>
+                <p class="notification-text"><strong>EaseMotion CSS:</strong> Smooth transition variants are active.</p>
+                <time datetime="2026-09-22T10:30">35 minutes ago</time>
+              </div>
+            </article>
+          </div>
+          <footer class="popover-footer">
+            <a href="#" class="popover-action">Mark all as read</a>
+          </footer>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <script>
+    // Accessibility helper for keyboard interaction on label trigger
+    document.querySelector('.popover-trigger').addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        document.getElementById('popover-toggle').click();
+      }
+    });
+  </script>
+</body>
+</html>
