@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Glowing Cyberpunk Popover Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="cyber-container">
+    <div class="popover-wrapper">
+      <!-- HTML5 Popover Trigger -->
+      <button 
+        class="cyber-button" 
+        popovertarget="cyber-flyout" 
+        aria-label="Toggle system diagnostics menu">
+        <span class="cyber-button__glitch" aria-hidden="true">SYS_DIAGNOSTICS</span>
+        <span class="cyber-button__label">SYS_DIAGNOSTICS</span>
+        <span class="cyber-button__tag">v2.0</span>
+      </button>
+
+      <!-- HTML5 Popover Content -->
+      <div id="cyber-flyout" popover class="cyber-popover">
+        <div class="cyber-popover__header">
+          <span class="cyber-popover__status"></span>
+          <h3 class="cyber-popover__title">SYSTEM_OVERRIDE</h3>
+        </div>
+        <div class="cyber-popover__body">
+          <p>Core temperature operating at peak levels. Neural link connected.</p>
+          <div class="cyber-popover__stats">
+            <div><span>LATENCY:</span> <strong>12ms</strong></div>
+            <div><span>ENCRYPTION:</span> <strong>AES-256</strong></div>
+          </div>
+        </div>
+        <div class="cyber-popover__footer">
+          <button class="cyber-action-btn" popovertarget="cyber-flyout" popovertargetaction="hide">
+            DISCONNECT
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
