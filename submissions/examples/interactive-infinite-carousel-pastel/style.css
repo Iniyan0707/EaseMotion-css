@@ -1,0 +1,141 @@
+/* EaseMotion Design Tokens & Variables */
+:root {
+  --easemotion-duration-slow: 20s;
+  --easemotion-ease-out: cubic-bezier(0.25, 1, 0.5, 1);
+  --easemotion-scale-hover: 1.05;
+  
+  /* Pastel Palette Tokens */
+  --pastel-mint: #e2f0d9;
+  --pastel-pink: #fce1e4;
+  --pastel-lavender: #e8dff5;
+  --pastel-yellow: #fcf4dd;
+  --pastel-text: #2d3748;
+  --pastel-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05);
+  --pastel-shadow-hover: 0 20px 30px -10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background-color: #faf9f6;
+  font-family: system-ui, -apple-system, sans-serif;
+  color: var(--pastel-text);
+  overflow-x: hidden;
+}
+
+/* Carousel Container & Mask */
+.carousel-container {
+  width: 100%;
+  max-width: 1200px;
+  overflow: hidden;
+  padding: 2rem 0;
+  mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent,
+    black 10%,
+    black 90%,
+    transparent
+  );
+}
+
+/* Animation Track */
+.carousel-track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+  animation: scrollTrack var(--easemotion-duration-slow) linear infinite;
+}
+
+/* Pause track on hover/focus within for interactivity */
+.carousel-container:hover .carousel-track,
+.carousel-track:focus-within {
+  animation-play-state: paused;
+}
+
+/* Individual Cards */
+.carousel-card {
+  flex: 0 0 280px;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: var(--pastel-shadow);
+  transition: transform 0.4s var(--easemotion-ease-out),
+              box-shadow 0.4s var(--easemotion-ease-out);
+  cursor: pointer;
+}
+
+.carousel-card:hover,
+.carousel-card:focus-visible {
+  transform: translateY(-8px) scale(var(--easemotion-scale-hover));
+  box-shadow: var(--pastel-shadow-hover);
+  outline: 2px solid var(--pastel-text);
+  outline-offset: 4px;
+}
+
+/* Pastel Theme Variants */
+.card-1 { background-color: var(--pastel-mint); }
+.card-2 { background-color: var(--pastel-pink); }
+.card-3 { background-color: var(--pastel-lavender); }
+.card-4 { background-color: var(--pastel-yellow); }
+
+.carousel-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.carousel-card p {
+  font-size: 0.9rem;
+  opacity: 0.85;
+  line-height: 1.4;
+}
+
+/* Infinite Keyframes */
+@keyframes scrollTrack {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - 0.75rem));
+  }
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .carousel-card {
+    flex: 0 0 220px;
+    padding: 1.5rem;
+  }
+}
+
+/* Accessibility: prefers-reduced-motion */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    animation: none;
+    overflow-x: auto;
+    width: 100%;
+    padding-bottom: 1rem;
+    scroll-snap-type: x mandatory;
+  }
+  
+  .carousel-card {
+    scroll-snap-align: start;
+  }
+  
+  .carousel-container {
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+}
