@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Infinite Carousel (Pastel)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="carousel-container" aria-label="Pastel Showcase Carousel">
+    <div class="carousel-track">
+      <!-- Original Items -->
+      <div class="carousel-card card-1" tabindex="0">
+        <h3>Soft Mint</h3>
+        <p>Calm and refreshing visual tone.</p>
+      </div>
+      <div class="carousel-card card-2" tabindex="0">
+        <h3>Blush Pink</h3>
+        <p>Gentle warmth and accessibility.</p>
+      </div>
+      <div class="carousel-card card-3" tabindex="0">
+        <h3>Lavender Mist</h3>
+        <p>Ethereal motion and focus cues.</p>
+      </div>
+      <div class="carousel-card card-4" tabindex="0">
+        <h3>Butter Yellow</h3>
+        <p>Bright highlight without harsh contrast.</p>
+      </div>
+
+      <!-- Duplicated Items for Seamless Loop -->
+      <div class="carousel-card card-1" aria-hidden="true" tabindex="-1">
+        <h3>Soft Mint</h3>
+        <p>Calm and refreshing visual tone.</p>
+      </div>
+      <div class="carousel-card card-2" aria-hidden="true" tabindex="-1">
+        <h3>Blush Pink</h3>
+        <p>Gentle warmth and accessibility.</p>
+      </div>
+      <div class="carousel-card card-3" aria-hidden="true" tabindex="-1">
+        <h3>Lavender Mist</h3>
+        <p>Ethereal motion and focus cues.</p>
+      </div>
+      <div class="carousel-card card-4" aria-hidden="true" tabindex="-1">
+        <h3>Butter Yellow</h3>
+        <p>Bright highlight without harsh contrast.</p>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
