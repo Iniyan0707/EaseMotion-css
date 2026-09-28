@@ -1,0 +1,84 @@
+// ==========================================================================
+// EaseMotion SCSS Mixins Suite
+// Feature: SCSS CSS Anchor Scope Helper v2
+// Description: Simplifies native CSS Anchor Positioning (CSS Anchor Positioning API)
+//              with progressive fallback support for cross-browser stability.
+// ==========================================================================
+
+/// CSS Anchor Scope Helper v2
+/// @param {String} $anchor-name - Custom identifier for the anchor target (e.g., "--popover-anchor")
+/// @param {String} $position - Position relative to anchor ('bottom-right', 'bottom-left', 'top-right', 'top-left', 'center')
+/// @param {Number|String} $offset - Offset distance from the anchor target (default: var(--em-anchor-offset, 8px))
+/// @param {String} $fallback-strategy - Fallback behavior for non-supporting browsers ('absolute', 'fixed')
+@mixin em-anchor-scope(
+  $anchor-name,
+  $position: 'bottom-right',
+  $offset: var(--em-anchor-offset, 8px),
+  $fallback-strategy: 'absolute'
+) {
+  // Common Fallback positioning (For cross-browser compatibility)
+  position: #{$fallback-strategy};
+  z-index: var(--em-z-popover, 1000);
+
+  // Fallback defaults when CSS Anchor Positioning is unsupported
+  @if $position == 'bottom-right' {
+    top: calc(100% + #{$offset});
+    left: 0;
+  } @else if $position == 'bottom-left' {
+    top: calc(100% + #{$offset});
+    right: 0;
+  } @else if $position == 'top-right' {
+    bottom: calc(100% + #{$offset});
+    left: 0;
+  } @else if $position == 'top-left' {
+    bottom: calc(100% + #{$offset});
+    right: 0;
+  } @else if $position == 'center' {
+    top: calc(100% + #{$offset});
+    left: 50%;
+    transform: translateX(-50%);
+  }
+
+  // Modern Native CSS Anchor Positioning API (Progressive Enhancement)
+  @supports (position-anchor: #{$anchor-name}) {
+    position-anchor: #{$anchor-name};
+    
+    @if $position == 'bottom-right' {
+      top: anchor(bottom);
+      left: anchor(left);
+      margin-top: #{$offset};
+      bottom: auto;
+      right: auto;
+    } @else if $position == 'bottom-left' {
+      top: anchor(bottom);
+      right: anchor(right);
+      margin-top: #{$offset};
+      bottom: auto;
+      left: auto;
+    } @else if $position == 'top-right' {
+      bottom: anchor(top);
+      left: anchor(left);
+      margin-bottom: #{$offset};
+      top: auto;
+      right: auto;
+    } @else if $position == 'top-left' {
+      bottom: anchor(top);
+      right: anchor(right);
+      margin-bottom: #{$offset};
+      top: auto;
+      left: auto;
+    } @else if $position == 'center' {
+      top: anchor(bottom);
+      left: anchor(center);
+      transform: translateX(-50%);
+      margin-top: #{$offset};
+    }
+  }
+}
+
+/// Helper Mixin to mark an element as an Anchor Target
+/// @param {String} $anchor-name - Custom identifier name for the anchor (e.g., "--popover-anchor")
+@mixin em-anchor-target($anchor-name) {
+  anchor-name: #{$anchor-name};
+  position: relative; // Ensure fallback context for absolute positioning
+}
