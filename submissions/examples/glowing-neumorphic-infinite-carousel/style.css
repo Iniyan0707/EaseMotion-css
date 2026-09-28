@@ -1,0 +1,248 @@
+/* ==========================================================================
+   EaseMotion Design Tokens & Neumorphism Variables
+   ========================================================================== */
+:root {
+  /* Color Tokens */
+  --em-neu-bg: #e6ecf5;
+  --em-neu-surface: #e6ecf5;
+  --em-text-primary: #334155;
+  --em-text-secondary: #64748b;
+  --em-accent-glow: #6366f1;
+  --em-accent-glow-secondary: #38bdf8;
+
+  /* Neumorphic Shadow Tokens */
+  --em-neu-shadow-flat: 
+    9px 9px 18px #c3c9d3, 
+    -9px -9px 18px #ffffff;
+  
+  --em-neu-shadow-hover: 
+    14px 14px 28px #bac0ca, 
+    -14px -14px 28px #ffffff;
+
+  --em-neu-shadow-inset: 
+    inset 4px 4px 8px #c3c9d3, 
+    inset -4px -4px 8px #ffffff;
+
+  /* Motion & Sizing Tokens */
+  --em-carousel-duration: 28s;
+  --em-transition-smooth: 350ms cubic-bezier(0.4, 0, 0.2, 1);
+  --em-card-width: 280px;
+  --em-card-gap: 2rem;
+  --em-radius-neu: 24px;
+}
+
+/* ==========================================================================
+   Base Layout
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--em-neu-bg);
+  color: var(--em-text-primary);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3.5rem;
+}
+
+.carousel-header {
+  text-align: center;
+  padding: 0 1rem;
+}
+
+.title {
+  font-size: 2.25rem;
+  font-weight: 800;
+  color: var(--em-text-primary);
+  letter-spacing: -0.025em;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: var(--em-text-secondary);
+}
+
+/* ==========================================================================
+   Pure CSS Infinite Carousel
+   ========================================================================== */
+.carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 2rem 0;
+  /* Soft Edge Vignette Gradient */
+  mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    black 8%, 
+    black 92%, 
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right, 
+    transparent 0%, 
+    black 8%, 
+    black 92%, 
+    transparent 100%
+  );
+}
+
+.carousel-track {
+  display: flex;
+  gap: var(--em-card-gap);
+  width: max-content;
+  animation: neuInfiniteScroll var(--em-carousel-duration) linear infinite;
+}
+
+/* Pause Scrolling on Hover */
+.carousel-wrapper:hover .carousel-track {
+  animation-play-state: paused;
+}
+
+@keyframes neuInfiniteScroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(calc(-50% - (var(--em-card-gap) / 2)));
+  }
+}
+
+/* ==========================================================================
+   Neumorphic Card & Glow Effect Styling
+   ========================================================================== */
+.neu-card {
+  position: relative;
+  width: var(--em-card-width);
+  flex-shrink: 0;
+  background: var(--em-neu-surface);
+  border-radius: var(--em-radius-neu);
+  box-shadow: var(--em-neu-shadow-flat);
+  transition: transform var(--em-transition-smooth), box-shadow var(--em-transition-smooth);
+  cursor: pointer;
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.neu-glow {
+  position: absolute;
+  inset: -2px;
+  background: linear-gradient(135deg, var(--em-accent-glow), var(--em-accent-glow-secondary));
+  border-radius: calc(var(--em-radius-neu) + 2px);
+  filter: blur(14px);
+  opacity: 0;
+  transition: opacity var(--em-transition-smooth);
+  z-index: 0;
+}
+
+.card-inner {
+  position: relative;
+  z-index: 1;
+  padding: 2rem 1.5rem;
+  background: var(--em-neu-surface);
+  border-radius: var(--em-radius-neu);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+}
+
+.card-icon {
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: var(--em-neu-surface);
+  box-shadow: var(--em-neu-shadow-inset);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--em-accent-glow);
+  transition: color var(--em-transition-smooth);
+}
+
+.card-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--em-text-primary);
+}
+
+.card-desc {
+  font-size: 0.875rem;
+  color: var(--em-text-secondary);
+  line-height: 1.5;
+}
+
+/* Hover Interactions */
+.neu-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--em-neu-shadow-hover);
+}
+
+.neu-card:hover .neu-glow {
+  opacity: 0.4;
+}
+
+.neu-card:hover .card-icon {
+  color: #38bdf8;
+}
+
+/* ==========================================================================
+   Responsive Adaptation & Accessibility
+   ========================================================================== */
+@media (max-width: 768px) {
+  :root {
+    --em-card-width: 240px;
+    --em-card-gap: 1.25rem;
+    --em-carousel-duration: 20s;
+  }
+
+  .title {
+    font-size: 1.75rem;
+  }
+
+  .card-inner {
+    padding: 1.5rem 1rem;
+  }
+}
+
+/* Reduced Motion Override */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-track {
+    animation: none !important;
+  }
+
+  .carousel-wrapper {
+    overflow-x: auto;
+    mask-image: none;
+    -webkit-mask-image: none;
+  }
+
+  .neu-card {
+    transition: none !important;
+  }
+
+  .neu-card:hover {
+    transform: none !important;
+  }
+}
