@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SCSS CSS Anchor Scope Helper v2 - Demo</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <main class="container">
+    <header class="demo-header">
+      <h1>CSS Anchor Scope Helper v2</h1>
+      <p>SCSS mixin for modern CSS Anchor Positioning with cross-browser fallbacks.</p>
+    </header>
+
+    <div class="demo-grid">
+      <!-- Target & Popover Instance 1 -->
+      <div class="card">
+        <h3>Bottom-Right Anchoring</h3>
+        <div class="anchor-container">
+          <input type="checkbox" id="toggle-1" class="popover-checkbox" />
+          <label for="toggle-1" class="anchor-btn target-1">
+            Trigger Anchor #1
+          </label>
+          <div class="popover-menu popover-1" role="tooltip">
+            <p><strong>Anchored Popover</strong></p>
+            <p>Scoped via <code>em-anchor-scope()</code></p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Target & Popover Instance 2 -->
+      <div class="card">
+        <h3>Centered Anchoring</h3>
+        <div class="anchor-container">
+          <input type="checkbox" id="toggle-2" class="popover-checkbox" />
+          <label for="toggle-2" class="anchor-btn target-2">
+            Trigger Anchor #2
+          </label>
+          <div class="popover-menu popover-2" role="tooltip">
+            <p><strong>Center-Aligned Popover</strong></p>
+            <p>Calculated dynamically with fallbacks.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+</body>
+</html>
