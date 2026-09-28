@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EaseMotion - Claymorphism Animated Timeline</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <main class="em-container">
+    <header class="em-header">
+      <h1 class="em-title">Product Roadmap</h1>
+      <p class="em-subtitle">A pure CSS vertical timeline featuring 3D fluffy Claymorphism design.</p>
+    </header>
+
+    <!-- Pure CSS Animated Timeline -->
+    <div class="em-timeline">
+      
+      <!-- Timeline Node 1 -->
+      <div class="em-timeline-item">
+        <div class="em-timeline-node"></div>
+        <div class="em-timeline-content em-clay-card">
+          <!-- Interactive State Manager -->
+          <input type="checkbox" id="tl-step-1" class="em-timeline-toggle" aria-hidden="true" />
+          
+          <label for="tl-step-1" class="em-timeline-label" tabindex="0" role="button" aria-expanded="false">
+            <div class="em-timeline-header">
+              <span class="em-timeline-date">Q1 2026</span>
+              <h3 class="em-timeline-heading">Project Kickoff</h3>
+            </div>
+            <div class="em-clay-btn">
+              <span class="em-chevron"></span>
+            </div>
+          </label>
+          
+          <!-- Expandable Content (Grid Animated) -->
+          <div class="em-timeline-details-container">
+            <div class="em-timeline-details">
+              <p>Initial planning, team formation, and finalizing the 3D claymorphic design system tokens for the upcoming application build.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Node 2 -->
+      <div class="em-timeline-item">
+        <div class="em-timeline-node"></div>
+        <div class="em-timeline-content em-clay-card">
+          <input type="checkbox" id="tl-step-2" class="em-timeline-toggle" aria-hidden="true" />
+          
+          <label for="tl-step-2" class="em-timeline-label" tabindex="0" role="button" aria-expanded="false">
+            <div class="em-timeline-header">
+              <span class="em-timeline-date">Q2 2026</span>
+              <h3 class="em-timeline-heading">Beta Development</h3>
+            </div>
+            <div class="em-clay-btn">
+              <span class="em-chevron"></span>
+            </div>
+          </label>
+          
+          <div class="em-timeline-details-container">
+            <div class="em-timeline-details">
+              <p>Core engineering phase. Developing pure CSS micro-interactions and ensuring strict WCAG accessibility compliance across all components.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timeline Node 3 -->
+      <div class="em-timeline-item">
+        <div class="em-timeline-node em-node-active"></div>
+        <div class="em-timeline-content em-clay-card">
+          <input type="checkbox" id="tl-step-3" class="em-timeline-toggle" aria-hidden="true" checked />
+          
+          <label for="tl-step-3" class="em-timeline-label" tabindex="0" role="button" aria-expanded="true">
+            <div class="em-timeline-header">
+              <span class="em-timeline-date">Q3 2026</span>
+              <h3 class="em-timeline-heading">Public Launch</h3>
+            </div>
+            <div class="em-clay-btn">
+              <span class="em-chevron"></span>
+            </div>
+          </label>
+          
+          <div class="em-timeline-details-container">
+            <div class="em-timeline-details">
+              <p>Deployment to production servers, marketing campaign rollouts, and initial user feedback aggregation protocols.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </main>
+</body>
+</html>
