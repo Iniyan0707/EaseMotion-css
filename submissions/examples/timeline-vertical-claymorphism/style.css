@@ -1,0 +1,304 @@
+:root {
+  /* EaseMotion Design Tokens (Claymorphism Theme) */
+  --em-color-bg: #e8eef2;
+  --em-color-text: #4a5568;
+  --em-color-text-muted: #718096;
+  --em-color-primary: #ff8c8c; /* Pastel coral for nodes */
+  
+  /* Claymorphism 3D Tokens */
+  --em-clay-bg: #e8eef2;
+  --em-clay-radius: 28px;
+  --em-clay-shadow: 
+    12px 12px 24px rgba(166, 180, 200, 0.6), 
+    inset -8px -8px 16px rgba(166, 180, 200, 0.4), 
+    inset 8px 8px 16px rgba(255, 255, 255, 0.9);
+  
+  --em-clay-shadow-hover: 
+    16px 16px 32px rgba(166, 180, 200, 0.7), 
+    inset -8px -8px 16px rgba(166, 180, 200, 0.4), 
+    inset 8px 8px 16px rgba(255, 255, 255, 0.9);
+
+  --em-clay-shadow-active: 
+    4px 4px 8px rgba(166, 180, 200, 0.6), 
+    inset -4px -4px 8px rgba(166, 180, 200, 0.4), 
+    inset 4px 4px 8px rgba(255, 255, 255, 0.9);
+    
+  /* Node & Line Tokens */
+  --em-clay-line-shadow: inset 3px 3px 6px rgba(166, 180, 200, 0.6), inset -3px -3px 6px rgba(255, 255, 255, 0.8);
+  --em-clay-node-shadow: inset -3px -3px 6px rgba(0, 0, 0, 0.15), inset 3px 3px 6px rgba(255, 255, 255, 0.5), 4px 4px 10px rgba(166, 180, 200, 0.6);
+
+  /* Animation Tokens */
+  --em-ease-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --em-duration-base: 400ms;
+  --em-duration-fast: 250ms;
+}
+
+/* Base Resets */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  background-color: var(--em-color-bg);
+  color: var(--em-color-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+.em-container {
+  padding: 4rem 2rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.em-header {
+  text-align: center;
+  margin-bottom: 4rem;
+}
+
+.em-title {
+  font-size: 2.5rem;
+  font-weight: 800;
+  margin: 0 0 1rem 0;
+  color: #2d3748;
+}
+
+.em-subtitle {
+  color: var(--em-color-text-muted);
+  font-size: 1.125rem;
+}
+
+/* ==========================================================================
+   Claymorphism Timeline Implementation
+   ========================================================================== */
+
+.em-timeline {
+  position: relative;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+/* The structural central 3D pipe/line */
+.em-timeline::after {
+  content: '';
+  position: absolute;
+  width: 12px;
+  background-color: var(--em-clay-bg);
+  box-shadow: var(--em-clay-line-shadow);
+  top: 0;
+  bottom: 0;
+  left: 50%;
+  margin-left: -6px;
+  border-radius: 6px;
+  z-index: 1;
+}
+
+/* Timeline Wrappers */
+.em-timeline-item {
+  position: relative;
+  width: 50%;
+  padding: 1rem 2.5rem;
+  box-sizing: border-box;
+  z-index: 2;
+  
+  /* Staggered entrance animation */
+  animation: em-clay-slide-up 0.8s var(--em-ease-bouncy) backwards;
+}
+
+.em-timeline-item:nth-child(1) { animation-delay: 0.1s; }
+.em-timeline-item:nth-child(2) { animation-delay: 0.3s; }
+.em-timeline-item:nth-child(3) { animation-delay: 0.5s; }
+
+/* Left/Right alternating positions */
+.em-timeline-item:nth-child(odd) {
+  left: 0;
+}
+
+.em-timeline-item:nth-child(even) {
+  left: 50%;
+}
+
+/* The 3D Clay Nodes (Circles on the line) */
+.em-timeline-node {
+  position: absolute;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background-color: var(--em-clay-bg);
+  box-shadow: var(--em-clay-node-shadow);
+  right: -14px;
+  top: 32px;
+  z-index: 3;
+  border: 4px solid var(--em-color-bg);
+  transition: background-color var(--em-duration-base) var(--em-ease-bouncy);
+}
+
+.em-timeline-item:nth-child(even) .em-timeline-node {
+  left: -14px;
+}
+
+.em-node-active {
+  background-color: var(--em-color-primary);
+}
+
+/* The Clay Cards */
+.em-clay-card {
+  background-color: var(--em-clay-bg);
+  border-radius: var(--em-clay-radius);
+  box-shadow: var(--em-clay-shadow);
+  padding: 1.5rem;
+  transition: box-shadow var(--em-duration-base) var(--em-ease-bouncy),
+              transform var(--em-duration-base) var(--em-ease-bouncy);
+}
+
+.em-clay-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--em-clay-shadow-hover);
+}
+
+/* Structural Interaction (Hidden Checkbox) */
+.em-timeline-toggle {
+  display: none;
+}
+
+.em-timeline-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  border-radius: 16px;
+}
+
+.em-timeline-label:focus-visible {
+  outline: 2px solid var(--em-color-primary);
+  outline-offset: 4px;
+}
+
+.em-timeline-date {
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--em-color-primary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.em-timeline-heading {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2d3748;
+}
+
+/* Expand Button (Small Clay circle) */
+.em-clay-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: var(--em-clay-bg);
+  box-shadow: var(--em-clay-shadow-active);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--em-duration-fast) var(--em-ease-bouncy);
+}
+
+.em-chevron {
+  width: 10px;
+  height: 10px;
+  border-right: 3px solid var(--em-color-primary);
+  border-bottom: 3px solid var(--em-color-primary);
+  transform: rotate(45deg) translateY(-2px);
+  border-radius: 1px;
+  transition: transform var(--em-duration-fast) var(--em-ease-bouncy);
+}
+
+/* CSS Grid Animation for Details */
+.em-timeline-details-container {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--em-duration-base) var(--em-ease-bouncy);
+}
+
+.em-timeline-details {
+  overflow: hidden;
+}
+
+.em-timeline-details p {
+  margin: 1.25rem 0 0 0;
+  color: var(--em-color-text-muted);
+  line-height: 1.6;
+}
+
+/* Active Expanded States */
+.em-timeline-toggle:checked ~ .em-timeline-label .em-clay-btn {
+  box-shadow: var(--em-clay-node-shadow);
+}
+
+.em-timeline-toggle:checked ~ .em-timeline-label .em-chevron {
+  transform: rotate(-135deg) translateY(-2px);
+}
+
+.em-timeline-toggle:checked ~ .em-timeline-details-container {
+  grid-template-rows: 1fr;
+}
+
+/* Staggered Entry Keyframes */
+@keyframes em-clay-slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(60px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ==========================================================================
+   Responsive Configuration
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  /* Move line to the left edge */
+  .em-timeline::after {
+    left: 24px;
+    margin-left: 0;
+  }
+  
+  /* Make all items full width, aligned to right of the line */
+  .em-timeline-item {
+    width: 100%;
+    padding-left: 72px;
+    padding-right: 0;
+  }
+  
+  .em-timeline-item:nth-child(even) {
+    left: 0;
+  }
+  
+  /* Reposition Nodes */
+  .em-timeline-node,
+  .em-timeline-item:nth-child(even) .em-timeline-node {
+    left: 12px;
+    right: auto;
+  }
+}
+
+/* Accessibility: Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .em-timeline-item {
+    animation: none !important;
+  }
+  
+  .em-timeline-details-container,
+  .em-clay-card,
+  .em-chevron,
+  .em-clay-btn {
+    transition: none !important;
+  }
+  
+  .em-clay-card:hover {
+    transform: none;
+  }
+}
