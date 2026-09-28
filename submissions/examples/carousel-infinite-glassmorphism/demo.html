@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EaseMotion - Glassmorphism Infinite Carousel</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Ambient background orbs to demonstrate the frosted glass effect -->
+  <div class="em-bg-shape em-bg-shape-1"></div>
+  <div class="em-bg-shape em-bg-shape-2"></div>
+  <div class="em-bg-shape em-bg-shape-3"></div>
+
+  <main class="em-container">
+    <header class="em-header">
+      <h1 class="em-title">Premium Features</h1>
+      <p class="em-subtitle">Pure CSS infinite scrolling with hover-to-pause interactivity.</p>
+    </header>
+
+    <!-- Pure CSS Infinite Carousel -->
+    <section class="em-carousel-wrapper" aria-label="Feature Showcase Carousel">
+      
+      <!-- Gradient masks for the edges -->
+      <div class="em-carousel-mask em-mask-left"></div>
+      <div class="em-carousel-mask em-mask-right"></div>
+
+      <div class="em-carousel-track">
+        
+        <!-- ORIGINAL SET -->
+        <div class="em-glass-card">
+          <div class="em-card-icon">⚡️</div>
+          <h3 class="em-card-title">Lightning Fast</h3>
+          <p class="em-card-desc">Zero JavaScript payload means instant rendering.</p>
+          <a href="#" class="em-card-link">Learn more &rarr;</a>
+        </div>
+        
+        <div class="em-glass-card">
+          <div class="em-card-icon">🛡️</div>
+          <h3 class="em-card-title">Highly Secure</h3>
+          <p class="em-card-desc">No external dependencies or scripts to compromise.</p>
+          <a href="#" class="em-card-link">Learn more &rarr;</a>
+        </div>
+        
+        <div class="em-glass-card">
+          <div class="em-card-icon">🎨</div>
+          <h3 class="em-card-title">Glass Aesthetic</h3>
+          <p class="em-card-desc">Modern translucent styling overlaying vibrant backgrounds.</p>
+          <a href="#" class="em-card-link">Learn more &rarr;</a>
+        </div>
+        
+        <div class="em-glass-card">
+          <div class="em-card-icon">♿️</div>
+          <h3 class="em-card-title">Accessible</h3>
+          <p class="em-card-desc">Native support for screen readers and reduced motion.</p>
+          <a href="#" class="em-card-link">Learn more &rarr;</a>
+        </div>
+
+        <!-- DUPLICATED SET (Required for seamless CSS infinite loop) -->
+        <!-- Hidden from screen readers via aria-hidden -->
+        <div class="em-glass-card" aria-hidden="true">
+          <div class="em-card-icon">⚡️</div>
+          <h3 class="em-card-title">Lightning Fast</h3>
+          <p class="em-card-desc">Zero JavaScript payload means instant rendering.</p>
+          <a href="#" class="em-card-link" tabindex="-1">Learn more &rarr;</a>
+        </div>
+        
+        <div class="em-glass-card" aria-hidden="true">
+          <div class="em-card-icon">🛡️</div>
+          <h3 class="em-card-title">Highly Secure</h3>
+          <p class="em-card-desc">No external dependencies or scripts to compromise.</p>
+          <a href="#" class="em-card-link" tabindex="-1">Learn more &rarr;</a>
+        </div>
+        
+        <div class="em-glass-card" aria-hidden="true">
+          <div class="em-card-icon">🎨</div>
+          <h3 class="em-card-title">Glass Aesthetic</h3>
+          <p class="em-card-desc">Modern translucent styling overlaying vibrant backgrounds.</p>
+          <a href="#" class="em-card-link" tabindex="-1">Learn more &rarr;</a>
+        </div>
+        
+        <div class="em-glass-card" aria-hidden="true">
+          <div class="em-card-icon">♿️</div>
+          <h3 class="em-card-title">Accessible</h3>
+          <p class="em-card-desc">Native support for screen readers and reduced motion.</p>
+          <a href="#" class="em-card-link" tabindex="-1">Learn more &rarr;</a>
+        </div>
+
+      </div>
+    </section>
+  </main>
+</body>
+</html>
