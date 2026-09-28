@@ -1,0 +1,188 @@
+/* ==========================================================================
+   EaseMotion Design Tokens
+   ========================================================================== */
+:root {
+  --em-bg: #0f172a;
+  --em-surface: #1e293b;
+  --em-border: rgba(255, 255, 255, 0.1);
+  --em-text: #f8fafc;
+  --em-text-muted: #94a3b8;
+  --em-accent: #6366f1;
+  --em-anchor-offset: 12px;
+  --em-z-popover: 1000;
+  --em-radius: 12px;
+}
+
+/* ==========================================================================
+   Base Layout
+   ========================================================================== */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--em-bg);
+  color: var(--em-text);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.container {
+  max-width: 900px;
+  width: 100%;
+}
+
+.demo-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.demo-header h1 {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+  color: var(--em-text);
+}
+
+.demo-header p {
+  color: var(--em-text-muted);
+}
+
+.demo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+.card {
+  background: var(--em-surface);
+  padding: 2rem;
+  border-radius: var(--em-radius);
+  border: 1px solid var(--em-border);
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  margin-bottom: 1.5rem;
+}
+
+.anchor-container {
+  position: relative;
+}
+
+/* ==========================================================================
+   Compiled Mixin Outputs: Target & Scope Styling
+   ========================================================================== */
+
+/* Target 1 */
+.target-1 {
+  anchor-name: --popover-anchor-1;
+  position: relative;
+}
+
+/* Target 2 */
+.target-2 {
+  anchor-name: --popover-anchor-2;
+  position: relative;
+}
+
+/* Trigger Controls */
+.anchor-btn {
+  display: inline-block;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--em-accent);
+  color: #fff;
+  font-weight: 600;
+  border-radius: calc(var(--em-radius) - 4px);
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 200ms ease;
+}
+
+.anchor-btn:hover {
+  opacity: 0.9;
+}
+
+.popover-checkbox {
+  position: absolute;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Popover Base Elements */
+.popover-menu {
+  background-color: #2d3748;
+  border: 1px solid var(--em-border);
+  border-radius: var(--em-radius);
+  padding: 1rem;
+  width: 220px;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+  font-size: 0.85rem;
+  color: var(--em-text-muted);
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 200ms ease, transform 200ms ease, visibility 200ms ease;
+}
+
+.popover-menu code {
+  color: var(--em-accent);
+}
+
+/* Popover 1 Scope (Bottom-Right) */
+.popover-1 {
+  position: absolute;
+  z-index: var(--em-z-popover, 1000);
+  top: calc(100% + var(--em-anchor-offset, 12px));
+  left: 0;
+}
+
+@supports (position-anchor: --popover-anchor-1) {
+  .popover-1 {
+    position-anchor: --popover-anchor-1;
+    top: anchor(bottom);
+    left: anchor(left);
+    margin-top: var(--em-anchor-offset, 12px);
+    bottom: auto;
+    right: auto;
+  }
+}
+
+/* Popover 2 Scope (Center) */
+.popover-2 {
+  position: absolute;
+  z-index: var(--em-z-popover, 1000);
+  top: calc(100% + var(--em-anchor-offset, 12px));
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+@supports (position-anchor: --popover-anchor-2) {
+  .popover-2 {
+    position-anchor: --popover-anchor-2;
+    top: anchor(bottom);
+    left: anchor(center);
+    transform: translateX(-50%);
+    margin-top: var(--em-anchor-offset, 12px);
+  }
+}
+
+/* Toggle Visibility State */
+.popover-checkbox:checked ~ .popover-menu {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* ==========================================================================
+   Accessibility Overrides
+   ========================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  .popover-menu,
+  .anchor-btn {
+    transition: none !important;
+  }
+}
