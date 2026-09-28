@@ -1,0 +1,256 @@
+:root {
+  /* EaseMotion Design Tokens (Glassmorphism Theme) */
+  --em-color-bg: #050510;
+  --em-color-text: #ffffff;
+  --em-color-text-muted: rgba(255, 255, 255, 0.65);
+  
+  /* Glass Tokens */
+  --em-glass-bg: rgba(255, 255, 255, 0.05);
+  --em-glass-bg-hover: rgba(255, 255, 255, 0.1);
+  --em-glass-border: rgba(255, 255, 255, 0.1);
+  --em-glass-border-light: rgba(255, 255, 255, 0.25);
+  --em-glass-blur: blur(20px);
+  --em-glass-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+  
+  /* Carousel Variables */
+  --em-carousel-speed: 24s;
+  --em-carousel-gap: 1.5rem;
+  --em-card-width: 320px;
+  
+  /* Animation Tokens */
+  --em-ease-standard: cubic-bezier(0.4, 0.0, 0.2, 1);
+  --em-duration-fast: 250ms;
+}
+
+/* Base Resets & Decorative Background */
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
+  background-color: var(--em-color-bg);
+  color: var(--em-color-text);
+  line-height: 1.5;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+
+/* Ambient Background Orbs */
+.em-bg-shape {
+  position: fixed;
+  border-radius: 50%;
+  filter: blur(100px);
+  z-index: -1;
+  opacity: 0.6;
+}
+.em-bg-shape-1 {
+  width: 50vw; height: 50vw;
+  background: #6366f1;
+  top: -10vw; left: -10vw;
+}
+.em-bg-shape-2 {
+  width: 40vw; height: 40vw;
+  background: #ec4899;
+  bottom: 0; right: -5vw;
+}
+.em-bg-shape-3 {
+  width: 30vw; height: 30vw;
+  background: #14b8a6;
+  top: 30vh; left: 40vw;
+}
+
+.em-container {
+  padding: 4rem 1rem;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.em-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.em-title {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem 0;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+}
+
+.em-subtitle {
+  color: var(--em-color-text-muted);
+  font-size: 1.125rem;
+}
+
+/* ==========================================================================
+   Infinite Glass Carousel Implementation
+   ========================================================================== */
+
+.em-carousel-wrapper {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* Clips the infinite track */
+  padding: 2rem 0;
+  display: flex;
+}
+
+/* Edge fading masks for depth effect */
+.em-carousel-mask {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 15%;
+  z-index: 10;
+  pointer-events: none; /* Allows clicking links behind the mask */
+}
+.em-mask-left {
+  left: 0;
+  background: linear-gradient(to right, var(--em-color-bg) 0%, transparent 100%);
+}
+.em-mask-right {
+  right: 0;
+  background: linear-gradient(to left, var(--em-color-bg) 0%, transparent 100%);
+}
+
+/* The Animated Track */
+.em-carousel-track {
+  display: flex;
+  gap: var(--em-carousel-gap);
+  width: max-content;
+  /* Key infinite scroll animation */
+  animation: em-infinite-scroll var(--em-carousel-speed) linear infinite;
+}
+
+/* Interactivity: Pause on Hover or Focus */
+.em-carousel-track:hover,
+.em-carousel-track:focus-within {
+  animation-play-state: paused;
+}
+
+/* The Keyframe Math: 
+   Translate by exactly -50% of the entire track width, MINUS half of the gap space.
+   This perfectly replaces the first half with the second half invisibly. 
+*/
+@keyframes em-infinite-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(calc(-50% - (var(--em-carousel-gap) / 2))); }
+}
+
+/* The Glassmorphism Cards */
+.em-glass-card {
+  width: var(--em-card-width);
+  background: var(--em-glass-bg);
+  backdrop-filter: var(--em-glass-blur);
+  -webkit-backdrop-filter: var(--em-glass-blur);
+  border: 1px solid var(--em-glass-border);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: var(--em-glass-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform var(--em-duration-fast) var(--em-ease-standard),
+              background var(--em-duration-fast) var(--em-ease-standard),
+              border-color var(--em-duration-fast) var(--em-ease-standard);
+}
+
+.em-glass-card:hover {
+  transform: translateY(-8px);
+  background: var(--em-glass-bg-hover);
+  border-color: var(--em-glass-border-light);
+}
+
+.em-card-icon {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  background: rgba(255, 255, 255, 0.1);
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  border: 1px solid var(--em-glass-border);
+}
+
+.em-card-title {
+  margin: 0 0 0.5rem 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.025em;
+}
+
+.em-card-desc {
+  color: var(--em-color-text-muted);
+  margin: 0 0 1.5rem 0;
+  font-size: 0.95rem;
+  flex-grow: 1;
+}
+
+.em-card-link {
+  color: #fff;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  border-radius: 4px;
+  transition: text-shadow var(--em-duration-fast) var(--em-ease-standard);
+}
+
+.em-card-link:hover {
+  text-shadow: 0 0 12px rgba(255, 255, 255, 0.8);
+}
+
+.em-card-link:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 4px;
+}
+
+/* ==========================================================================
+   Responsive Configuration & Accessibility
+   ========================================================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --em-card-width: 280px; /* Smaller cards for mobile */
+    --em-carousel-gap: 1rem;
+  }
+  
+  .em-carousel-mask {
+    width: 8%; /* Smaller masks to reveal more content */
+  }
+}
+
+/* Accessibility: Reduced Motion Support */
+@media (prefers-reduced-motion: reduce) {
+  /* Kill the automatic animation */
+  .em-carousel-track {
+    animation: none !important;
+  }
+  
+  /* Enable native horizontal scrolling instead */
+  .em-carousel-wrapper {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 2rem; /* Give room for scrollbar */
+    scroll-snap-type: x mandatory;
+  }
+
+  .em-glass-card {
+    scroll-snap-align: center;
+    transition: none !important;
+  }
+
+  .em-glass-card:hover {
+    transform: none;
+  }
+  
+  /* Hide the duplicated elements so manual scroll isn't artificially long */
+  .em-glass-card[aria-hidden="true"] {
+    display: none;
+  }
+  
+  /* Remove masks so they don't block manual touch scrolling */
+  .em-carousel-mask {
+    display: none;
+  }
+}
